@@ -31,6 +31,7 @@ def index():
             prod_html = bs(prodRes.text, "html.parser")
             print(prod_html)
             commentboxes = prod_html.find_all('div', {'class': "_16PBlm"})
+            pname=prod_html.find('span',{'class':'B_NuCI'})
 
             filename = searchString + ".csv"
             fw = open(filename, "w")
@@ -73,10 +74,7 @@ def index():
                 reviews.append(mydict)
             logging.info("log my final result {}".format(reviews))
 
-            client=pymongo.MongoClient("mongodb+srv://ahamedismail:ahamedismail09@ahamedismail.y71kauu.mongodb.net/?retryWrites=true&w=majority")
-            db=client['review_scrapper']
-            coll_scrp=db['scrapper_detail']
-            coll_scrp.insert_many(reviews)
+            
             
             return render_template('result.html',pname=pname.text,links=productLink, reviews=reviews[0:(len(reviews)-1)])
         except Exception as e:
