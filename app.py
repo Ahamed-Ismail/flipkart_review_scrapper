@@ -80,7 +80,7 @@ def index():
         except Exception as e:
             logging.info(e)
             return 'something is wrong'
-    # return render_template('results.html')
+    
 
     else:
         return render_template('index.html')
